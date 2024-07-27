@@ -1,5 +1,6 @@
 package com.example.login_auth_api.domain.user;
 
+import com.example.login_auth_api.dto.RegisterRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,6 +21,8 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+
 
 
 }

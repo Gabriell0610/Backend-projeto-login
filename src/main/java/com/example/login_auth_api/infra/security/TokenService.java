@@ -29,7 +29,6 @@ public class TokenService {
             throw new RuntimeException("Error while authenticating");
         }
 
-
     }
 
     public String validateToken(String token) {

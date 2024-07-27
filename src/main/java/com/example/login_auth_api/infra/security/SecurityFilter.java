@@ -28,16 +28,16 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-         var token = this.recoverToken(request);
-         var login = tokenService.validateToken(token);
+         var token = this.recoverToken(request); // Pegando o token do usuário
+         var login = tokenService.validateToken(token); // Validar se o token está correto
 
          if(login != null) {
              User user = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User not found"));
              var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
              var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-             SecurityContextHolder.getContext().setAuthentication(authentication);
+             SecurityContextHolder.getContext().setAuthentication(authentication); // Adicionando o usuário logado no contexto do springSecurity
          }
-         filterChain.doFilter(request, response);
+         filterChain.doFilter(request, response); // se não tiver logado, não Adicionará  no contexto
     }
 
     private String recoverToken(HttpServletRequest request) {
